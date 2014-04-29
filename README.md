@@ -6,4 +6,11 @@ If you have questions/comments: christoph.hahn@nhm.uio.no
 
 A step by step guide through some parts of the process described in [Hahn et al. 2014](http://gbe.oxfordjournals.org/content/early/2014/04/13/gbe.evu078.short?rss=1 "Hahn et al. 2014 at GBE") is given below.
 
-to be added..
+
+PREREQUISITES:
+
+A number of scripts/programs used in the pipeline are expected to be in your path:
+sort_contigs.pl - script available from [here](/usit/abel/u1/chrishah/data/salaris-genome/assembly/ORTHOMCL/compliantFasta-cd-hit-0.95/version2/goodProteins.fasta). required by sort_clusters_v2.pl if you want to extract the sequences into a fasta file (see below)
+
+to be continued..
+
