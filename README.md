@@ -15,7 +15,7 @@ sort_contigs.pl - script available from [here](http://www.genome.ou.edu/informat
 
 WALKTHROUGH:
 
-	-bash-4.1$ select_clusters_v2.pl --groups groups.txt.gz --fasta goodProteins.fasta --critical critical.txt --exclusive
+	-bash-4.1$ select_clusters_v2.pl --groups groups.txt.gz --fasta goodProteins.fasta --critical critical.txt --exclusive > sort_clusters.log
 
 to be continued..
 
