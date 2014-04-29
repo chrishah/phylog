@@ -10,7 +10,8 @@ A step by step guide through some parts of the process described in [Hahn et al.
 PREREQUISITES:
 
 A number of scripts/programs used in the pipeline are expected to be in your path:
-sort_contigs.pl - script available from [here](/usit/abel/u1/chrishah/data/salaris-genome/assembly/ORTHOMCL/compliantFasta-cd-hit-0.95/version2/goodProteins.fasta). required by sort_clusters_v2.pl if you want to extract the sequences into a fasta file (see below)
+
+sort_contigs.pl - script available from [here](http://www.genome.ou.edu/informatics.html) (required by sort_clusters_v2.pl if you want to extract the sequences into a fasta file - see below)
 
 to be continued..
 
