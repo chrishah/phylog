@@ -17,7 +17,7 @@ WALKTHROUGH:
 
 	-bash-4.1$ select_clusters_v2.pl --groups groups.txt.gz --fasta goodProteins.fasta --critical critical.txt --exclusive > sort_clusters.log
 
-optionally distribute the fasta files in a number of directories:
+optionally distribute the fasta files across a number of directories:
 
 	-bash-4.1$ distribute.pl . 50
 
