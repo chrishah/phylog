@@ -11,7 +11,7 @@ use Getopt::Long;
 use Cwd qw(abs_path);
 use List::MoreUtils 'first_index'; 
 
-my $USAGE = 	"\nUsage: ./select_cluster.pl <parameters>\n
+my $USAGE = 	"\nUsage: ./select_cluster_v2.pl <parameters>\n
 		mandatory parameters:
 		--groups	<file>		groups.txt output file from mcl pipeline
 		--min		<int>		minimal number of taxa contained in the cluster, default: 8
@@ -39,7 +39,6 @@ my $min_taxon_per_cluster=8;
 my $max_median_sequences_per_taxon=2;
 my $max_mean_sequence_per_taxon=5;
 my $exclude;
-my $minimal_platyhelminth_number;
 my @clusters = ();
 my @cluster_ID = ();
 my %sequences_per_cluster;
@@ -48,10 +47,6 @@ my @output;
 my $critical_taxa;
 my @critical;
 my @critical_ind;
-
-##obsolete
-my (@platyhelminthes, @Monogenea, @Turbellaria, @Cestoda, @Trematoda, $critical_species_count, $create_files);
-
 
 GetOptions (    "min=i" => \$min_taxon_per_cluster,
                 "out=s" => \$results_directory,
