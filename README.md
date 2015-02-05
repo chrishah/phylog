@@ -37,10 +37,10 @@ optionally distribute the fasta files across a number of directories. THe below 
 	-bash-4.1$ distribute.pl . 50
 
 With the next command we will do the following to every *.fasta file in the directory:
--align sequences using clustalo
--perform alignment trimming with Aliscore and Alicut
--find the best fitting model of evolution using ProteinModelSelection.pl script and RAxML
--infer ML tree using the best fitting model using RAxML (100 rapid boostrap pseudoreplicates)
++ align sequences using clustalo
++ perform alignment trimming with Aliscore and Alicut
++ find the best fitting model of evolution using ProteinModelSelection.pl script and RAxML
++ infer ML tree using the best fitting model using RAxML (100 rapid boostrap pseudoreplicates)
 
 	-bash-4.1$ process_genes.pl . --nomask --bootstrap 100
 
