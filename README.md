@@ -7,7 +7,7 @@ The scripts in this repository were used in the analyses presented in [Hahn et a
 
 If you have questions/comments don't hesitate to contact me at: c.hahn@hull.ac.uk
 
-A step by step guide through some parts of the process described in [Hahn et al. 2014](http://gbe.oxfordjournals.org/content/early/2014/04/13/gbe.evu078.short?rss=1 "Hahn et al. 2014 at GBE") is given below.
+A step by step guide through some parts of the process described in [Hahn et al. 2014](http://gbe.oxfordjournals.org/content/early/2014/04/13/gbe.evu078.short?rss=1 "Hahn et al. 2014 at GBE") is given below. For references to the external programs used by my scripts please refer to the methods section of our paper.
 
 
 Prerequisites
