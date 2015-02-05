@@ -31,16 +31,27 @@ my %count;
 my $minimal_alignment_length = 50;
 my $bootstrap = 20;
 my ($help, $align, $mono_mask, $trim, $notree, $phylo, $current) = (0, 0, 0, 0, 0, 0, 0);
-my $USAGE = "\nUSAGE: ./process_genes.pl <PATH/to/DIR> <options>
+my $USAGE = "\nThis script is a wrapper for phylogenetic inference. If no options are specified it will perform (for every *.fasta file in the specified directory):
 
-		options:\n
-		--help		show this infomation
-		--noalign	omit alignment
-		--nomask	omit monophyly masking
-		--notrim	omit alignment trimming
-		--notree	omit tree inference (but do model prediction)
-		--nophylo	omit phylogenetic analysis (i.e. model prediction and tree inference)
-		--bootstrap	number of bootstrap replicates to perform in phylogenetic analysis (default=20)\n";
+	-protein sequence alignment using clustalo
+	-alignment trimming using ALISCORE and ALICUT
+	-monophyly masking, i.e. if more than one sequence per taxon is present it will choose one representative as described in Hahn et al. 2014
+	-find best fitting model of protein evolution for the remaining alignment
+	-infer ML tree using the infered model using RAxML
+
+Each of these steps can be individually omitted via the options.
+
+
+	USAGE: ./process_genes.pl <PATH/to/DIR> <options>
+
+	options:\n
+	--help		show this infomation
+	--noalign	omit alignment
+	--nomask	omit monophyly masking
+	--notrim	omit alignment trimming
+	--notree	omit tree inference (but do model prediction)
+	--nophylo	omit phylogenetic analysis (i.e. model prediction and tree inference)
+	--bootstrap	number of bootstrap replicates to perform in phylogenetic analysis (default=20)\n";
 		
 
 GetOptions (	"help!" => \$help,

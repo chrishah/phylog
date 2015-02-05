@@ -32,9 +32,17 @@ The following section takes you step by step through the data preparation descri
 
 	-bash-4.1$ select_clusters_v2.pl --groups groups.txt.gz --fasta goodProteins.fasta --critical critical.txt --exclusive > sort_clusters.log
 
-optionally distribute the fasta files across a number of directories:
+optionally distribute the fasta files across a number of directories. THe below command would distribute all *.fasta files in the current directory (specified by ".") into sub-directories, with 50 *.fasta files per directory. Most of my downstream scripts serially process all files in the directory. So distributing files into separate directories now, could allow to parallelize the following steps.  
 
 	-bash-4.1$ distribute.pl . 50
+
+With the next command we will do the following to every *.fasta file in the directory:
+-align sequences using clustalo
+-perform alignment trimming with Aliscore and Alicut
+-find the best fitting model of evolution using ProteinModelSelection.pl script and RAxML
+-infer ML tree using the best fitting model using RAxML (100 rapid boostrap pseudoreplicates)
+
+	-bash-4.1$ process_genes.pl . --nomask --bootstrap 100
 
 
 to be continued..

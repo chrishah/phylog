@@ -14,7 +14,9 @@ my $selection = "fasta"; #alternative would be "aln\.fasta"
 
 my $fasta_dir = $ARGV[0];
 my $number_files_per_batch = $ARGV[1];
-my $USAGE = "\nUSAGE: ./distribute.pl <PATH/to/DIR> <#files-per-batch>\n";
+my $USAGE = "\nThe script takes all files of a given suffix (default: *.fasta - can be changed in script) and distributes them into sub-directories, with the number of files to go in each sub-directory defined by the user. The directories will be numbered starting with 10000.
+
+		USAGE: ./distribute.pl <PATH/to/DIR> <#files-per-batch>\n\n";
 my @FILES;
 my $filecount = 10000;
 my @filelist;
