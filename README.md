@@ -68,10 +68,12 @@ cd ..
 mkdir 2-bin-trees
 cd 2-bin-trees
 #create list of all trees
-for dir in $(ls -1 | grep "^[0-9]\{5\}" | sed 's/\/$//g'); do ls -1 $WORKING/1-initial-trees/$dir/*_processed/RAxML_bipartitions.ALICUT_*; done |perl -ne 'chomp; @a=split/\//; @b=split("_",$a[4]); $out = $b[2]."_".$b[3];print substr($out,0,-4). "\n";' > IDs.list
+for dir in $(ls -1 | grep "^[0-9]\{5\}" | sed 's/\/$//g'); do ls -1 $WORKING/1-initial-trees/$dir/*_processed/RAxML_bipartitions.ALICUT_*; done |perl -ne 'chomp; @a=split/\//; @b=split("_",$a[-1]); $out = $b[2]."_".$b[3];print substr($out,0,-4). "\n";' > IDs.list
 #create symbolic links to all trees
 mkdir trees
 for file in $(<IDs.list); do ln -sv $WORKING/1-initial-trees/100??/$file\_processed/RAxML_bipartitions.ALICUT_$file.aln trees/RAxML_bipartitions.ALICUT_$file.aln; done
+#bin trees
+tree_bin_v2.pl trees > tree_bin.log
 ```
 
 to be continued..
