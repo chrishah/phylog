@@ -39,16 +39,16 @@ __We start__ by fitering the orthology clustering result obtained by OrthoMCL. T
 A fasta file containing the protein sequences for each of the retained cluster will be written to `cluster_select_output`.
 See a list of all options by simply running `select_clusters_v2.pl` without options.
 ```bash
--bash-4.1$ select_clusters_v2.pl --groups groups.txt.gz --fasta goodProteins.fasta --critical critical.txt --exclusive > sort_clusters.log
+select_clusters_v2.pl --groups groups.txt.gz --fasta goodProteins.fasta --critical critical.txt --exclusive > sort_clusters.log
 ```
 __Next__ we will infer ML trees for each individual alignment. _Optionally_ distribute the resulting fasta files across a number of directories. The below command would distribute all *.fasta files in the current directory (specified by ".") into sub-directories, with 50 *.fasta files per directory. Most of my downstream scripts serially process all files in a directory. To distribute files into separate directories may allow parallel processing of the directory content, if the required computational resources are available.
 ```bash
--bash-4.1$ cd cluster_select_output
+cd cluster_select_output
 WORKING=$(pwd)
--bash-4.1$ mkdir 1-initial-trees
--bash-4.1$ cd 1-initial-trees
--bash-4.1$ mv ../*.fasta .
--bash-4.1$ distribute.pl . 50
+mkdir 1-initial-trees
+cd 1-initial-trees
+mv ../*.fasta .
+distribute.pl . 50
 ```
 With the next command we will do the following to every *.fasta file in a directory (e.g.: `10000` - repeat/extend for data in additional directories accordingly):
 + align sequences using clustalo
@@ -57,7 +57,7 @@ With the next command we will do the following to every *.fasta file in a direct
 + infer ML tree using the best fitting model using RAxML (100 rapid boostrap pseudoreplicates)
 Again, a list of all flags for the script is displayed when running `process_genes.pl` without options. 
 ```bash
--bash-4.1$ process_genes.pl ./10000 --nomask --bootstrap 100
+process_genes.pl ./10000 --nomask --bootstrap 100
 ```
 __Next__ we will bin the resulting trees in three categories:
 + trees containing no paralogs (each taxon is represented by only one sequence)
@@ -68,9 +68,9 @@ cd ..
 mkdir 2-bin-trees
 cd 2-bin-trees
 #create list of all trees
-for a in {10000..10039}; do ls -1 ../1-initial-trees/$a/*_processed/RAxML_bipartitions.ALICUT_*; done |perl -ne 'chomp; @a=split/\//; @b=split("_",$a[4]); $out = $b[2]."_".$b[3];print substr($out,0,-4). "\n";' > IDs.list
+for dir in $(ls -1 | grep "^[0-9]\{5\}" | sed 's/\/$//g'); do ls -1 $WORKING/1-initial-trees/$dir/*_processed/RAxML_bipartitions.ALICUT_*; done |perl -ne 'chomp; @a=split/\//; @b=split("_",$a[4]); $out = $b[2]."_".$b[3];print substr($out,0,-4). "\n";' > IDs.list
 #create symbolic links to all trees
- mkdir trees
+mkdir trees
 for file in $(<IDs.list); do ln -sv $WORKING/1-initial-trees/100??/$file\_processed/RAxML_bipartitions.ALICUT_$file.aln trees/RAxML_bipartitions.ALICUT_$file.aln; done
 ```
 
