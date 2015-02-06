@@ -49,15 +49,14 @@ __Next__ we will infer ML trees for each individual alignment. _Optionally_ dist
 -bash-4.1$ mv ../*.fasta .
 -bash-4.1$ distribute.pl . 50
 ```
-With the next command we will do the following to every *.fasta file in the directory `10000` (:
+With the next command we will do the following to every *.fasta file in a directory (e.g.: `10000` - repeat/extend for data in additional directories accordingly):
 + align sequences using clustalo
 + perform alignment trimming with Aliscore and Alicut
 + find the best fitting model of evolution using ProteinModelSelection.pl script and RAxML
 + infer ML tree using the best fitting model using RAxML (100 rapid boostrap pseudoreplicates)
 Again, a list of all flags for the script is displayed when running `process_genes.pl` without options. 
 ```bash
--bash-4.1$ cd 10000
--bash-4.1$ process_genes.pl . --nomask --bootstrap 100
+-bash-4.1$ process_genes.pl ./10000 --nomask --bootstrap 100
 ```
 
 to be continued..
