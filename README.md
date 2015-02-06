@@ -44,6 +44,7 @@ See a list of all options by simply running `select_clusters_v2.pl` without opti
 __Next__ we will infer ML trees for each individual alignment. _Optionally_ distribute the resulting fasta files across a number of directories. The below command would distribute all *.fasta files in the current directory (specified by ".") into sub-directories, with 50 *.fasta files per directory. Most of my downstream scripts serially process all files in a directory. To distribute files into separate directories may allow parallel processing of the directory content, if the required computational resources are available.
 ```bash
 -bash-4.1$ cd cluster_select_output
+WORKING=$(pwd)
 -bash-4.1$ mkdir 1-initial-trees
 -bash-4.1$ cd 1-initial-trees
 -bash-4.1$ mv ../*.fasta .
@@ -63,14 +64,14 @@ __Next__ we will bin the resulting trees in three categories:
 + trees containing in-paralogs (i.e. all paralogs form monopyletic groups)
 + trees containing out-paralogs (i.e. paralogs do not form monophyletic groups)
 ```bash
--bash-4.1$ mkdir ../2-bin-trees
--bash-4.1$ WORKING=$(pwd)
--bash-4.1$ cd ../2-bin-trees
+cd ..
+mkdir 2-bin-trees
+cd 2-bin-trees
 #create list of all trees
--bash-4.1$ for a in {10000..10039}; do ls -1 ../1-initial-trees/$a/*_processed/RAxML_bipartitions.ALICUT_*; done |perl -ne 'chomp; @a=split/\//; @b=split("_",$a[4]); $out = $b[2]."_".$b[3];print substr($out,0,-4). "\n";' > IDs.list
+for a in {10000..10039}; do ls -1 ../1-initial-trees/$a/*_processed/RAxML_bipartitions.ALICUT_*; done |perl -ne 'chomp; @a=split/\//; @b=split("_",$a[4]); $out = $b[2]."_".$b[3];print substr($out,0,-4). "\n";' > IDs.list
 #create symbolic links to all trees
--bash-4.1$ mkdir trees
--bash-4.1$ for file in $(<IDs.list); do ln -sv $WORKING/1-initial-trees/100??/$file\_processed/RAxML_bipartitions.ALICUT_$file.aln trees/RAxML_bipartitions.ALICUT_$file.aln; done
+ mkdir trees
+for file in $(<IDs.list); do ln -sv $WORKING/1-initial-trees/100??/$file\_processed/RAxML_bipartitions.ALICUT_$file.aln trees/RAxML_bipartitions.ALICUT_$file.aln; done
 ```
 
 to be continued..
