@@ -29,20 +29,33 @@ Walkthrough
 
 The following section takes you step by step through the data preparation described in [Hahn et al. 2014](http://gbe.oxfordjournals.org/content/early/2014/04/13/gbe.evu078.short?rss=1 "Hahn et al. 2014 at GBE") - from the OrthoMCL output (groups.txt in data/ directory) to final concatenated alignment of genes with average bootstrap support >= 90:
 
-
-	-bash-4.1$ select_clusters_v2.pl --groups groups.txt.gz --fasta goodProteins.fasta --critical critical.txt --exclusive > sort_clusters.log
-
-optionally distribute the fasta files across a number of directories. THe below command would distribute all *.fasta files in the current directory (specified by ".") into sub-directories, with 50 *.fasta files per directory. Most of my downstream scripts serially process all files in the directory. So distributing files into separate directories now, could allow to parallelize the following steps.  
-
-	-bash-4.1$ distribute.pl . 50
-
-With the next command we will do the following to every *.fasta file in the directory:
+__We start__ by fitering the orthology clustering result obtained by OrthoMCL. The below command will apply the following filters:
++ minimal number of taxa contained in the cluster, default: 8
++ maximum median number of sequences per taxon, default: 2
++ maximum mean number of sequences per taxon, default: 5
++ cluster contains all taxa listed in critical.txt
++ only the taxa listed in critical.txt will be retained
+A fasta file containing the protein sequences for each of the retained cluster will be written to `cluster_select_output`.
+See a list of all options by simply running `select_clusters_v2.pl` without options.
+```bash
+-bash-4.1$ select_clusters_v2.pl --groups groups.txt.gz --fasta goodProteins.fasta --critical critical.txt --exclusive > sort_clusters.log
+```
+__Next__ we will infer ML trees for each individual alignment. Optionally distribute the resulting fasta files across a number of directories. The below command would distribute all *.fasta files in the current directory (specified by ".") into sub-directories, with 50 *.fasta files per directory. Most of my downstream scripts serially process all files in the directory. So distributing files into separate directories now and process the directories in paralell will speed things up. 
+```bash
+-bash-4.1$ cd cluster_select_output
+-bash-4.1$ mkdir 1-initial-trees
+-bash-4.1$ cd 1-initial-trees
+-bash-4.1$ mv ../*.fasta .
+-bash-4.1$ distribute.pl . 50
+```
+With the next command we will do the following to every *.fasta file in the directory `10000`:
 + align sequences using clustalo
 + perform alignment trimming with Aliscore and Alicut
 + find the best fitting model of evolution using ProteinModelSelection.pl script and RAxML
 + infer ML tree using the best fitting model using RAxML (100 rapid boostrap pseudoreplicates)
-
+Again, a list of all flags for script is displayed when running `process_genes.pl` without options. 
 ```bash
+-bash-4.1$ cd 10000
 -bash-4.1$ process_genes.pl . --nomask --bootstrap 100
 ```
 
