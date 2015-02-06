@@ -36,7 +36,7 @@ __We start__ by fitering the orthology clustering result obtained by OrthoMCL. T
 + cluster contains all taxa listed in critical.txt
 + only the taxa listed in critical.txt will be retained
 
-A fasta file containing the protein sequences for each of the retained cluster will be written to `cluster_select_output`.
+A fasta file containing the protein sequences for each of the retained cluster will be written to the directory `cluster_select_output`. The file `sort_clusters.log` will contain information on the decision making for all clusters and a summary of the number of clusters retained/dropped at the end.
 See a list of all options by simply running `select_clusters_v2.pl` without options.
 ```bash
 select_clusters_v2.pl --groups groups.txt.gz --fasta goodProteins.fasta --critical critical.txt --exclusive > sort_clusters.log
@@ -59,7 +59,7 @@ Again, a list of all flags for the script is displayed when running `process_gen
 ```bash
 process_genes.pl ./10000 --nomask --bootstrap 100
 ```
-__Next__ we will bin the resulting trees in three categories:
+__Next__ we will bin the resulting trees into three categories:
 + trees containing no paralogs (each taxon is represented by only one sequence)
 + trees containing in-paralogs (i.e. all paralogs form monopyletic groups)
 + trees containing out-paralogs (i.e. paralogs do not form monophyletic groups)
