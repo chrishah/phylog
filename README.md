@@ -13,7 +13,7 @@ A step by step guide through some parts of the process described in [Hahn et al.
 Prerequisites
 -------------
 
-A number of external scripts/programs are expected to be in your path:
+A number of external scripts/programs are expected to be in your path (I have collected some of the external scripts [here](https://github.com/chrishah/phylog/tree/master/scripts-external):
 
 - sort_contigs.pl - script available from [here](http://www.genome.ou.edu/informatics.html) (required by sort_clusters_v2.pl if you want to extract the sequences into a fasta file - see below)
 - select_contigs.pl - script available from [here](http://www.genome.ou.edu/informatics.html)
