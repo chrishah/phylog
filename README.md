@@ -16,6 +16,7 @@ Prerequisites
 A number of external scripts/programs are expected to be in your path:
 
 - sort_contigs.pl - script available from [here](http://www.genome.ou.edu/informatics.html) (required by sort_clusters_v2.pl if you want to extract the sequences into a fasta file - see below)
+- select_contigs.pl - script available from [here](http://www.genome.ou.edu/informatics.html)
 - fasta2phylip.pl - script available from [here](https://github.com/chinchliff/physcripts/blob/master/fasta2phylip.pl) (required by process_genes.pl)
 - clustal omega - available from [here](http://www.clustal.org/omega/) (required by process_genes.pl) - scripts were tested with clustal omega 1.1 
 - ALICUT - available from [here](https://www.zfmk.de/en/research/research-centres-and-groups/utilities) (required by process_genes.pl) - scripts were tested with ALICUT_v2.3
